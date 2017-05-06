@@ -14,14 +14,14 @@ namespace MarkovChain.Classes
 
         public Dictionary(string key, IEnumerable<string> values)
         {
-            Setup();
-
+            Setup(key);
+            
             Values.AddRange(values);
         }
 
         public Dictionary(string key, string value)
         {
-            Setup();
+            Setup(key);
 
             Values.Add(value);
         }
@@ -36,8 +36,10 @@ namespace MarkovChain.Classes
             Values.AddRange(vals);
         }
 
-        private void Setup()
+        private void Setup(string key)
         {
+            Key = key;
+
             Values = new List<string>();
         }
     }
