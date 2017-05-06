@@ -36,6 +36,13 @@ namespace MarkovChain.Classes
             Values.AddRange(vals);
         }
 
+        public string RandomValue(Random random)
+        {
+            var index = random.Next(Values.Count);
+
+            return Values[index];
+        }
+
         private void Setup(string key)
         {
             Key = key;

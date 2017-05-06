@@ -48,6 +48,13 @@ namespace MarkovChain.Classes
             }
         }
 
+        public Dictionary RandomDic(Random random)
+        {
+            var index = random.Next(Dics.Count);
+
+            return Dics[index];
+        }
+
         public Dictionary this[string key]
         {
             get
