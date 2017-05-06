@@ -10,6 +10,25 @@ namespace MarkovChain.Classes
     {
         public string Key { get; private set; }
 
-        public string[] Values { get; private set; }
+        public List<string> Values { get; private set; }
+
+        public Dictionary(string key, string[] values)
+        {
+            Setup();
+
+            Values.AddRange(values);
+        }
+
+        public Dictionary(string key, string value)
+        {
+            Setup();
+
+            Values.Add(value);
+        }
+
+        private void Setup()
+        {
+            Values = new List<string>();
+        }
     }
 }
