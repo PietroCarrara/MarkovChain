@@ -26,6 +26,16 @@ namespace MarkovChain.Classes
             Values.Add(value);
         }
 
+        public void Add(string val)
+        {
+            Values.Add(val);
+        }
+
+        public void AddRange(IEnumerable<string> vals)
+        {
+            Values.AddRange(vals);
+        }
+
         private void Setup()
         {
             Values = new List<string>();
