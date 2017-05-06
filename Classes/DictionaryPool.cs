@@ -9,7 +9,7 @@ namespace MarkovChain.Classes
 {
     public class DictionaryPool
     {
-        List<Dictionary> Dics;
+        public List<Dictionary> Dics { get; private set; }
 
         public DictionaryPool()
         {
