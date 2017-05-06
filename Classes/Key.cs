@@ -12,7 +12,7 @@ namespace MarkovChain.Classes
 
         public List<string> Values { get; private set; }
 
-        public Dictionary(string key, string[] values)
+        public Dictionary(string key, IEnumerable<string> values)
         {
             Setup();
 
