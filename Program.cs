@@ -20,7 +20,6 @@ namespace MarkovChain
                 foreach (var line in File.ReadLines(fileName))
                 {
                     EvalInput(line.Split(' '));
-                    Console.WriteLine(line);
                 }
             }
 
@@ -32,6 +31,8 @@ namespace MarkovChain
 
             // Save input with windows line endings
             File.AppendAllText(fileName, input + "\r\n");
+
+            Console.ReadLine();
         }
 
         static void PrintDic(Dictionary dic)
