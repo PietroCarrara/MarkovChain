@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 using MarkovChain.Classes;
 
@@ -10,27 +7,31 @@ namespace MarkovChain
 {
     class Program
     {
+        static DictionaryPool pool = new DictionaryPool();
+        static Random random = new Random();
+
+        const string fileName = "lines.txt";
+
         static void Main(string[] args)
         {
-            DictionaryPool pool = new DictionaryPool();
-
-            string input = Console.ReadLine();
-
-            string[] words = input.Split(' ');
-
-            for (int i = 0; i < words.Length - 2; i++)
+            // If we can find the file containing extra input, use it
+            if (File.Exists(fileName))
             {
-                Dictionary sla = new Dictionary(words[i] + " " + words[i + 1], words[i + 2]);
-
-                // PrintDic(sla);
-
-                pool.Add(sla);
+                foreach (var line in File.ReadLines(fileName))
+                {
+                    EvalInput(line.Split(' '));
+                    Console.WriteLine(line);
+                }
             }
 
-            foreach (var dic in pool.Dics)
-            {
-                PrintDic(dic);
-            }
+            string input = Console.ReadLine().ToLower();
+
+            EvalInput(input.Split(' '));
+
+            OutPutSentence();
+
+            // Save input with windows line endings
+            File.AppendAllText(fileName, input + "\r\n");
         }
 
         static void PrintDic(Dictionary dic)
@@ -45,6 +46,39 @@ namespace MarkovChain
             }
 
             Console.WriteLine("]");
+        }
+
+        static void OutPutSentence()
+        {
+            var dic = pool.RandomDic(random);
+            var keys = dic.Key.Split(' ');
+
+            Console.Write(dic.Key + " ");
+
+            do
+            {
+                var val = dic.RandomValue(random);
+
+                Console.Write(val + " ");
+
+                keys[0] = keys[1];
+                keys[1] = val;
+
+                dic = pool[keys[0] + " " + keys[1]];
+            }
+            while (dic != null);
+
+            Console.WriteLine();
+        }
+
+        static void EvalInput(string[] words)
+        {
+            for (int i = 0; i < words.Length - 2; i++)
+            {
+                Dictionary dic = new Dictionary(words[i] + " " + words[i + 1], words[i + 2]);
+
+                pool.Add(dic);
+            }
         }
     }
 }
