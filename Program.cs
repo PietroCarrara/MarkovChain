@@ -23,16 +23,22 @@ namespace MarkovChain
                 }
             }
 
+            Console.Write("> ");
             string input = Console.ReadLine().ToLower();
 
-            EvalInput(input.Split(' '));
+            do
+            {
+                EvalInput(input.Split(' '));
 
-            OutPutSentence();
+                OutPutSentence();
 
-            // Save input with windows line endings
-            File.AppendAllText(fileName, input + "\r\n");
+                // Save input with windows line endings
+                File.AppendAllText(fileName, input + "\r\n");
 
-            Console.ReadLine();
+                Console.Write("> ");
+                input = Console.ReadLine().ToLower();
+            }
+            while (input != "");
         }
 
         static void PrintDic(Dictionary dic)
