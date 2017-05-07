@@ -19,16 +19,16 @@ namespace MarkovChain
             {
                 foreach (var line in File.ReadLines(fileName))
                 {
-                    EvalInput(line.Split(' '));
+                    EvalInput(line.ToLower().Split(' '));
                 }
             }
 
             Console.Write("> ");
-            string input = Console.ReadLine().ToLower();
+            string input = Console.ReadLine();
 
             do
             {
-                EvalInput(input.Split(' '));
+                EvalInput(input.ToLower().Split(' '));
 
                 OutPutSentence();
 
@@ -36,7 +36,7 @@ namespace MarkovChain
                 File.AppendAllText(fileName, input + "\r\n");
 
                 Console.Write("> ");
-                input = Console.ReadLine().ToLower();
+                input = Console.ReadLine();
             }
             while (input != "");
         }
